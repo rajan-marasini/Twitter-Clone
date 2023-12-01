@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+    height: 100%;
+    font-family: "Roboto", sans-serif;
+}
+
+.btn {
+    @apply flex items-center gap-2  py-2 px-10 rounded-full hover:opacity-95;
+}
