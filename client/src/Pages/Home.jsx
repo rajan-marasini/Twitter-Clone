@@ -60,13 +60,35 @@ const Home = () => {
     const handleLike = async (id) => {
         try {
             const { data } = await axios.post(`/api/v1/post/likeapost/${id}`);
+            if (data.message == "Liked") {
+                setAllPosts((prev) =>
+                    prev.map((post) =>
+                        id === post.id
+                            ? { ...post, likedIds: [...post.likedIds, user.id] }
+                            : post
+                    )
+                );
+            } else {
+                setAllPosts((prev) =>
+                    prev.map((post) =>
+                        id === post.id
+                            ? {
+                                  ...post,
+                                  likedIds: post.likedIds.filter(
+                                      (userId) => userId !== user.id
+                                  ),
+                              }
+                            : post
+                    )
+                );
+            }
         } catch (error) {
             console.log(error);
         }
     };
 
     useEffect(() => {
-        const getAllPosts = async (req, res) => {
+        const getAllPosts = async () => {
             const { data } = await axios.get("/api/v1/post/allPosts");
 
             if (data) {
@@ -207,7 +229,7 @@ const Home = () => {
                                         <span>
                                             <FaHeart
                                                 fill={
-                                                    post.likedIds.includes(
+                                                    post?.likedIds?.includes(
                                                         user.id
                                                     )
                                                         ? "red"
