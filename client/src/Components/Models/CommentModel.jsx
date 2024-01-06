@@ -22,6 +22,7 @@ const CommentModel = ({
             );
             if (data.success) {
                 toast.success("comment  successful");
+
                 setCommentModelShown(false);
             }
             console.log(data);
@@ -48,7 +49,7 @@ const CommentModel = ({
                             <textarea
                                 value={commentBody}
                                 onChange={(e) => setCommentBody(e.target.value)}
-                                className="w-full h-full border-none outline-none bg-transparent"
+                                className="w-full h-24 border-none outline-none bg-transparent resize-none"
                                 placeholder="Type a comment"
                                 required
                             />
